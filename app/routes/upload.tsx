@@ -21,6 +21,7 @@ export default function Upload() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        e.stopPropagation();
 
         const form = e.currentTarget.closest('form')
         if(!form) return
