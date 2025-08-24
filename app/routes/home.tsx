@@ -40,7 +40,7 @@ export default function Home() {
   }, [])
 
   return <main className="bg-[url('/images/bg-main.svg')] bg-cover">
-    <Navbar />
+    <Navbar isAuthenticated={auth.isAuthenticated} signOut={auth.signOut} />
     <section className="main-section">
       <div className="page-heading py-16">
         <h1>Smart Tracking for Your Job Hunt & Resume Feedback</h1>
@@ -48,7 +48,7 @@ export default function Home() {
       </div>
 
       {
-         loadingResume && (
+        loadingResume && (
           <div className="flex flex-col items-center justify-center">
             <img src="/images/resume-scan-2.gif" alt="Resume Loadinf" className="w-[200px]" />
           </div>
