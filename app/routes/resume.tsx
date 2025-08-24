@@ -43,10 +43,8 @@ export default function Resume() {
             const imageBlob = await fs.read(data.imagePath)
             if (!imageBlob) return
 
-            const imageFile = new Blob([imageBlob], { type: "application/pdf" })
-
-            const imageUrl = URL.createObjectURL(imageFile)
-            setImageUrl(imageUrl)
+            const imageUrl = URL.createObjectURL(imageBlob);
+            setImageUrl(imageUrl);
 
             if (data.feedback) {
                 setFeedback(data.feedback)
