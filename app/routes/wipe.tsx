@@ -6,6 +6,7 @@ const WipeApp = () => {
     const { auth, isLoading, error, clearError, fs, ai, kv } = usePuterStore();
     const navigate = useNavigate();
     const [files, setFiles] = useState<FSItem[]>([]);
+    const [statusText, setStatusText] = useState<string | null>(null)
 
     const loadFiles = async () => {
         const files = (await fs.readDir("./")) as FSItem[];
@@ -28,6 +29,8 @@ const WipeApp = () => {
         });
         await kv.flush();
         loadFiles();
+        setStatusText("All data has been successfully wiped!")
+        setTimeout(() => setStatusText(null), 5000)
     };
 
     if (isLoading) {
@@ -39,25 +42,21 @@ const WipeApp = () => {
     }
 
     return (
-        <div>
-            Authenticated as: {auth.user?.username}
-            <div>Existing files:</div>
-            <div className="flex flex-col gap-4">
-                {files.map((file) => (
-                    <div key={file.id} className="flex flex-row gap-4">
-                        <p>{file.name}</p>
-                    </div>
-                ))}
-            </div>
+        <main className="bg-[url('/images/bg-main.svg')] bg-cover flex flex-col items-center">
+            <h2 className="mb-2">Hello {auth.user?.username},</h2>
+            <div className="text-center mb-2 w-[400px]">Need more space? Remove all resumes and generated images by clicking <b>Wipe App Data</b>.
+                {statusText ? (<p className="bg-green-200 mb-2 mt-2 rounded-md p-2">{statusText}</p>) : (<p className="bg-red-200 mb-2 mt-2 rounded-md p-2"><b>Warning:</b> This will permanently delete data.</p>)
+                }
+            </div >
             <div>
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer"
+                    className="primary-button"
                     onClick={() => handleDelete()}
                 >
                     Wipe App Data
                 </button>
             </div>
-        </div>
+        </main >
     );
 };
 

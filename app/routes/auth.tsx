@@ -28,7 +28,7 @@ export default function Auth() {
                         <h1>Welcome</h1>
                         <h2>Sign in and Let AI guide your career path</h2>
                     </div>
-                    <div> {isLoading ? (<button className="auth-button animate-pulse"><p>Signing you in...</p></button>) : (<>
+                    <div className="flex justify-center"> {isLoading ? (<button className="auth-button animate-pulse"><p>Signing you in...</p></button>) : (<>
                         {auth.isAuthenticated ? (<button className="auth-button" onClick={auth.signOut}><p>Sign Out</p></button>) : (<button className="auth-button" onClick={auth.signIn}><p>Sign In</p></button>)}
                     </>)}</div>
                 </section>
